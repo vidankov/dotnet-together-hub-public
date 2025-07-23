@@ -2,8 +2,8 @@
 {
     public record Location
     {
-        public string City { get; } = default;
-        public string Street { get; } = default;
+        public string City { get; } = default!;
+        public string Street { get; } = default!;
         
         public Location(string city, string street)
         {
