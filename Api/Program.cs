@@ -1,17 +1,12 @@
-using Infrastructure.Data.DataBaseContext;
+using Api;
+using Infrastructure;
 using Infrastructure.Data.Extensions;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
-builder.Services.AddOpenApi();
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-{
-    options.UseSqlite(builder.Configuration.GetConnectionString(
-        "SqLiteConnection"
-    ));
-});
+builder.Services
+    .AddApiServices(builder.Configuration)
+    .AddInfrastructureServices(builder.Configuration);
 
 var app = builder.Build();
 
