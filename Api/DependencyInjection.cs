@@ -1,6 +1,4 @@
-﻿using Infrastructure.Data.Extensions;
-
-namespace Api
+﻿namespace Api
 {
     public static class DependencyInjection
     {
