@@ -1,4 +1,6 @@
-﻿namespace Api
+﻿using Infrastructure.Data.Extensions;
+
+namespace Api
 {
     public static class DependencyInjection
     {
@@ -9,6 +11,21 @@
             services.AddOpenApi();
 
             return services;
+        }
+
+        public static WebApplication UseApiServices(
+            this WebApplication app)
+        {
+            if (app.Environment.IsDevelopment())
+            {
+                app.MapOpenApi();
+            }
+
+            app.UseHttpsRedirection();
+            app.UseAuthorization();
+            app.MapControllers();
+
+            return app;
         }
     }
 }
