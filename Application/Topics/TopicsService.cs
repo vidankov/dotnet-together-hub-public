@@ -17,12 +17,12 @@ namespace Application.Topics
             throw new NotImplementedException();
         }
 
-        public async Task<Topic> GetTopicAsync(TopicId id)
+        public Task<Topic> GetTopicAsync(TopicId id)
         {
-            
+            throw new NotImplementedException();
         }
 
-        public async Task<List<Topic>> GetTopics()
+        public async Task<List<Topic>> GetTopicsAsync()
         {
             var topics = await dbContext.Topics
                 .AsNoTracking()
