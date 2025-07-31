@@ -2,6 +2,7 @@
 using Application.Exceptions;
 using Application.Extensions;
 using Application.ModelsDto;
+using Domain.ValueObjects;
 using Microsoft.Extensions.Logging;
 
 namespace Application.Topics
@@ -21,7 +22,8 @@ namespace Application.Topics
 
         public async Task<TopicResponseDto> GetTopicAsync(Guid id)
         {
-            var result = await dbContext.Topics.FindAsync(id);
+            TopicId topicId = TopicId.Of(id); 
+            var result = await dbContext.Topics.FindAsync(topicId);
 
             if (result is null)
             {
