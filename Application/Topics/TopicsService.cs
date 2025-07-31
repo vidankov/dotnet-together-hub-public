@@ -1,4 +1,5 @@
 ﻿using Application.Data.DataBaseContext;
+using Application.Extensions;
 using Application.ModelsDto;
 using Microsoft.Extensions.Logging;
 
@@ -28,7 +29,7 @@ namespace Application.Topics
                 .AsNoTracking()
                 .ToListAsync();
 
-            return topics;
+            return topics.ToTopicResponseDtoList();
         }
 
         public Task<TopicResponseDto> UpdateTopicAsync(Guid id, Topic topicRequestDto)
