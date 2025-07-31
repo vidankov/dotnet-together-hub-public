@@ -1,4 +1,5 @@
 ﻿using Application.Data.DataBaseContext;
+using Application.Exceptions;
 using Application.Extensions;
 using Application.ModelsDto;
 using Microsoft.Extensions.Logging;
@@ -18,9 +19,16 @@ namespace Application.Topics
             throw new NotImplementedException();
         }
 
-        public Task<TopicResponseDto> GetTopicAsync(Guid id)
+        public async Task<TopicResponseDto> GetTopicAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var result = await dbContext.Topics.FindAsync(id);
+
+            if (result is null)
+            {
+                throw new TopicNotFoundException(id);
+            }
+
+            return result.ToTopicResponseDto();
         }
 
         public async Task<List<TopicResponseDto>> GetTopicsAsync()
