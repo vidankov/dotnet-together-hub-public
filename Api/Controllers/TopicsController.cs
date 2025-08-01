@@ -16,7 +16,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<TopicResponseDto>> GetTopics(Guid id)
+        public async Task<ActionResult<TopicResponseDto>> GetTopic(Guid id)
         {
             return Ok(await topicsService.GetTopicAsync(id));
         }
