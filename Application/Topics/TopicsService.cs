@@ -53,9 +53,29 @@ namespace Application.Topics
             return topics.ToTopicResponseDtoList();
         }
 
-        public Task<TopicResponseDto> UpdateTopicAsync(Guid id, Topic topicRequestDto)
+        public async Task<TopicResponseDto> UpdateTopicAsync(Guid id, UpdateTopicDto dto)
         {
-            throw new NotImplementedException();
+            TopicId  topicId = TopicId.Of(id);
+
+            var topic = await dbContext.Topics.FindAsync(topicId);
+
+            if (topic is null)
+            {
+                throw new TopicNotFoundException(id);
+            }
+
+            topic.Title = dto.Title ?? topic.Title;
+            topic.Summary = dto.Summary ?? topic.Summary;
+            topic.TopicType = dto.TopicType ?? topic.TopicType;
+            topic.EventStart = dto.EventStart;
+            topic.Location = Location.Of(
+                dto.Location.City,
+                dto.Location.Street
+            );
+
+            await dbContext.SaveChangesAsync(CancellationToken.None);
+
+            return topic.ToTopicResponseDto();
         }
     }
 }
