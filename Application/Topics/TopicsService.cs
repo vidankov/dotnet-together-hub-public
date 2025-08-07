@@ -1,8 +1,4 @@
 ﻿using Application.Data.DataBaseContext;
-using Application.Exceptions;
-using Application.Extensions;
-using Application.ModelsDto;
-using Domain.ValueObjects;
 using Microsoft.Extensions.Logging;
 
 namespace Application.Topics
