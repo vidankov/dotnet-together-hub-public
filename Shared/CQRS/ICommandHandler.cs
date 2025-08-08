@@ -1,6 +1,4 @@
-﻿using MediatR;
-
-namespace Shared.CQRS
+﻿namespace Shared.CQRS
 {
     public interface ICommandHandler<in TCommand, TResponse>
         : IRequestHandler<TCommand, TResponse>
