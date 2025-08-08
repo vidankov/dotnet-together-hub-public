@@ -24,14 +24,7 @@ namespace Application.Topics
 
         public async Task DeleteTopicAsync(Guid id)
         {
-            TopicId topicId = TopicId.Of(id);
-
-            var topic = await dbContext.Topics.FindAsync(topicId);
-
-            if (topic is null || topic.IsDeleted)
-            {
-                throw new TopicNotFoundException(id);
-            }
+            var topic = await FindTopic(id);
 
             topic.IsDeleted = true;
             topic.DeletedAt = DateTimeOffset.UtcNow;
@@ -41,13 +34,7 @@ namespace Application.Topics
 
         public async Task<TopicResponseDto> GetTopicAsync(Guid id)
         {
-            TopicId topicId = TopicId.Of(id); 
-            var result = await dbContext.Topics.FindAsync(topicId);
-
-            if (result is null || result.IsDeleted)
-            {
-                throw new TopicNotFoundException(id);
-            }
+            var result = await FindTopic(id);
 
             return result.ToTopicResponseDto();
         }
@@ -64,14 +51,7 @@ namespace Application.Topics
 
         public async Task<TopicResponseDto> UpdateTopicAsync(Guid id, UpdateTopicDto dto)
         {
-            TopicId  topicId = TopicId.Of(id);
-
-            var topic = await dbContext.Topics.FindAsync(topicId);
-
-            if (topic is null || topic.IsDeleted)
-            {
-                throw new TopicNotFoundException(id);
-            }
+            var topic = await FindTopic(id);
 
             topic.Title = dto.Title ?? topic.Title;
             topic.Summary = dto.Summary ?? topic.Summary;
@@ -85,6 +65,20 @@ namespace Application.Topics
             await dbContext.SaveChangesAsync(CancellationToken.None);
 
             return topic.ToTopicResponseDto();
+        }
+
+        protected async Task<Topic> FindTopic(Guid id)
+        {
+            TopicId topicId = TopicId.Of(id);
+
+            var topic = await dbContext.Topics.FindAsync(topicId);
+
+            if (topic is null || topic.IsDeleted)
+            {
+                throw new TopicNotFoundException(id);
+            }
+
+            return topic;
         }
     }
 }
