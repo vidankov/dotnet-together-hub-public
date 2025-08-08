@@ -1,8 +1,8 @@
 ﻿namespace Shared.CQRS
 {
-    public interface IQueryHandler<in TQuerry, TResponse>
-        : IRequestHandler<TQuerry, TResponse>
-        where TQuerry : IQuerry<TResponse>
+    public interface IQueryHandler<in TQuery, TResponse>
+        : IRequestHandler<TQuery, TResponse>
+        where TQuery : IQuery<TResponse>
         where TResponse : notnull
     {
     }

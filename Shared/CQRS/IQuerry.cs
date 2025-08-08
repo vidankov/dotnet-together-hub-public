@@ -1,6 +1,6 @@
 ﻿namespace Shared.CQRS
 {
-    public interface IQuerry<out TResponse>
+    public interface IQuery<out TResponse>
         : IRequest<TResponse>
     {
     }
