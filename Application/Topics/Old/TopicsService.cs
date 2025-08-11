@@ -1,8 +1,9 @@
 ﻿using Application.Data.DataBaseContext;
 using Microsoft.Extensions.Logging;
 
-namespace Application.Topics
+namespace Application.Topics.Old
 {
+    [Obsolete]
     public class TopicsService(IApplicationDbContext dbContext,
         ILogger<TopicsService> logger) : ITopicsService
     {
@@ -43,7 +44,7 @@ namespace Application.Topics
         {
             var topics = await dbContext.Topics
                 .AsNoTracking()
-                .Where(t  => !t.IsDeleted)
+                .Where(t => !t.IsDeleted)
                 .ToListAsync();
 
             return topics.ToTopicResponseDtoList();
