@@ -1,4 +1,3 @@
-using Application.Topics.Commands.DeleteTopic;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
