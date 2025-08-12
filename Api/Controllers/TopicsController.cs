@@ -1,4 +1,3 @@
-using Application.Topics.Commands.CreateTopic;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
