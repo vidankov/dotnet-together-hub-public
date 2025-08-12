@@ -4,5 +4,6 @@ global using Infrastructure.Data.Extensions;
 global using Application.ModelsDto;
 global using Application.Exceptions;
 // global using Application.Topics;
-global using Application.Topics.Queries.GetTopics;
 global using MediatR;
+global using Application.Topics.Queries.GetTopic;
+global using Application.Topics.Queries.GetTopics;

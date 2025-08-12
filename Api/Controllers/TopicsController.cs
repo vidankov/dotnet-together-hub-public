@@ -1,4 +1,3 @@
-using Application.Topics.Queries.GetTopic;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
