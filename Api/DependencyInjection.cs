@@ -1,4 +1,5 @@
 ﻿using Api.Exceptions.Handler;
+using Application.Topics.Queries.GetTopics;
 
 namespace Api
 {
@@ -10,6 +11,9 @@ namespace Api
             services.AddExceptionHandler<CustomExceptionHandler>();
             services.AddControllers();
             services.AddOpenApi();
+
+            services.AddMediatR(config => config
+                .RegisterServicesFromAssembly(typeof(GetTopicsHandler).Assembly));
 
             return services;
         }
