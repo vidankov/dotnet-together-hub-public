@@ -1,7 +1,10 @@
 ﻿
+using AutoMapper;
+
 namespace Application.Topics.Commands.CreateTopic
 {
-    public class CreateTopicHandler(IApplicationDbContext dbContext)
+    public class CreateTopicHandler(
+        IApplicationDbContext dbContext, IMapper mapper)
         : ICommandHandler<CreateTopicCommand, CreateTopicResult>
     {
         public async Task<CreateTopicResult> Handle(
@@ -14,16 +17,6 @@ namespace Application.Topics.Commands.CreateTopic
             return new CreateTopicResult(newTopic.ToTopicResponseDto());
         }
 
-        private Topic CreateTopic(CreateTopicDto dto)
-        {
-            return Topic.Create(
-                TopicId.Of(Guid.NewGuid()),
-                dto.Title,
-                dto.EventStart,
-                dto.Summary,
-                dto.TopicType,
-                Location.Of(dto.Location.City, dto.Location.Street)
-            );
-        }
+        private Topic CreateTopic(CreateTopicDto dto) => mapper.Map<Topic>(dto);
     }
 }
