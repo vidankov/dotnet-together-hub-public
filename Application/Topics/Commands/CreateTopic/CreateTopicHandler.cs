@@ -10,13 +10,11 @@ namespace Application.Topics.Commands.CreateTopic
         public async Task<CreateTopicResult> Handle(
             CreateTopicCommand request, CancellationToken cancellationToken)
         {
-            var newTopic = CreateTopic(request.TopicDto);
+            var newTopic = mapper.Map<Topic>(request.TopicDto);
             dbContext.Topics.Add(newTopic);
             await dbContext.SaveChangesAsync(CancellationToken.None);
             
             return new CreateTopicResult(newTopic.ToTopicResponseDto());
         }
-
-        private Topic CreateTopic(CreateTopicDto dto) => mapper.Map<Topic>(dto);
     }
 }
